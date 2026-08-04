@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-BACKEND_URL = "http://127.0.0.1:8000/chat"
+BACKEND_URL = "https://asistente-do.onrender.com/Chat"  # URL del backend FastAPI
 
 st.set_page_config(page_title="Asistente de Diseño Organizacional", page_icon="🏛️")
 
