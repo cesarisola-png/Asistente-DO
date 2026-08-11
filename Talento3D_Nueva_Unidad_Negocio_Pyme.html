@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talento 3D — Nueva Unidad de Negocio para Estudios con Cartera de Clientes Pyme</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul:    #1a3a5c;
+  --azul2:   #2980b9;
+  --verde:   #27ae60;
+  --naranja: #e67e22;
+  --rojo:    #c0392b;
+  --violeta: #7c3aed;
+  --teal:    #0d9488;
+  --gris:    #6b7280;
+  --bg:      #ffffff;
+  --bg2:     #f8fafc;
+  --bg3:     #f1f5f9;
+  --border:  #e2e8f0;
+  --text:    #1e293b;
+  --text2:   #64748b;
+}
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg2); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,.97); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.nav-brand { font-size: 15px; font-weight: 700; color: var(--azul); letter-spacing: -.3px; }
+.nav-brand span { color: var(--azul2); }
+.nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav-links a { font-size: 12px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 5px 9px; border-radius: 6px; transition: all .15s; }
+.nav-links a:hover { background: var(--bg3); color: var(--azul); }
+
+/* LAYOUT */
+section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+section:first-of-type { padding-top: 7rem; }
+
+/* HERO */
+.hero { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 7rem 2rem 4rem; max-width: 100%; background: linear-gradient(160deg, #f0f7ff 0%, #fafffe 50%, #fff8f0 100%); border-bottom: 1px solid var(--border); }
+.hero-badge { display: inline-block; background: var(--azul2); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.5rem; }
+.hero h1 { font-size: clamp(26px, 5vw, 46px); font-weight: 800; color: var(--azul); line-height: 1.15; margin-bottom: 1.2rem; max-width: 720px; }
+.hero h1 em { font-style: normal; color: var(--azul2); }
+.hero p { font-size: clamp(15px, 2vw, 18px); color: var(--text2); max-width: 580px; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-primary { background: var(--azul); color: #fff; padding: 13px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all .15s; }
+.btn-primary:hover { background: var(--azul2); transform: translateY(-1px); }
+.btn-ghost { border: 1.5px solid var(--azul); color: var(--azul); padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all .15s; }
+.btn-ghost:hover { background: var(--azul); color: #fff; }
+.hero-stats { display: flex; gap: 2.5rem; margin-top: 3.5rem; flex-wrap: wrap; justify-content: center; }
+.stat { text-align: center; }
+.stat strong { display: block; font-size: 28px; font-weight: 800; color: var(--azul2); }
+.stat span { font-size: 11px; color: var(--text2); font-weight: 500; }
+
+/* SECTION TITLES */
+.section-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--azul2); margin-bottom: .5rem; }
+.section-title { font-size: clamp(22px, 3.5vw, 32px); font-weight: 800; color: var(--azul); line-height: 1.2; margin-bottom: .8rem; }
+.section-sub { font-size: 15px; color: var(--text2); max-width: 580px; line-height: 1.7; }
+
+/* PAIN */
+.pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 2.5rem; }
+.pain-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; border-left: 4px solid var(--rojo); transition: box-shadow .15s; }
+.pain-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+.pain-icon { font-size: 24px; margin-bottom: .6rem; }
+.pain-card h3 { font-size: 14px; font-weight: 700; color: var(--azul); margin-bottom: .4rem; }
+.pain-card p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* REVEAL */
+.reveal-box { background: linear-gradient(135deg, var(--azul) 0%, #1e5f8e 100%); border-radius: 16px; padding: 3rem 2.5rem; text-align: center; margin: 3rem 0; color: #fff; }
+.reveal-box h2 { font-size: clamp(20px, 3vw, 28px); font-weight: 800; margin-bottom: 1rem; }
+.reveal-box p { font-size: 15px; opacity: .88; max-width: 540px; margin: 0 auto 2rem; line-height: 1.7; }
+.reveal-pillars { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.pillar { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 1rem 1.4rem; min-width: 170px; }
+.pillar .p-icon { font-size: 28px; margin-bottom: .4rem; }
+.pillar .p-name { font-size: 13px; font-weight: 700; }
+.pillar .p-sub { font-size: 11px; opacity: .75; }
+
+/* PHASE STRIP */
+.phase-strip { display: flex; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-top: 2.5rem; }
+.phase-block { flex: 1; min-width: 200px; padding: 1.4rem 1.2rem; background: var(--bg); border-right: 1px solid var(--border); text-align: center; }
+.phase-block:last-child { border-right: none; }
+.ph-num { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin-bottom: 3px; }
+.ph-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+.ph-done { background: rgba(39,174,96,.12); color: var(--verde); }
+.ph-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+.ph-name { font-size: 13px; font-weight: 700; color: var(--azul); margin-bottom: 3px; }
+.ph-items { font-size: 11px; color: var(--text2); line-height: 1.5; }
+
+/* MODULE GROUP HEADER */
+.mod-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; border-radius: 12px; margin: 2.5rem 0 1.5rem; }
+.mod-header-icon { font-size: 26px; }
+.mod-header-title { font-size: 16px; font-weight: 800; color: var(--azul); }
+.mod-header-sub { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+/* PRODUCT CARDS */
+.product-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 2rem 2.2rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; transition: box-shadow .15s; }
+.product-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,.08); }
+.product-card.top-blue   { border-top: 4px solid var(--azul2); }
+.product-card.top-teal   { border-top: 4px solid var(--teal); }
+.product-card.top-violet { border-top: 4px solid var(--violeta); }
+.product-card.top-orange { border-top: 4px solid var(--naranja); }
+.prod-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-bottom: .8rem; }
+.bg-blue   { background: rgba(41,128,185,.12); color: var(--azul2); }
+.bg-teal   { background: rgba(13,148,136,.12); color: var(--teal); }
+.bg-violet { background: rgba(124,58,237,.12); color: var(--violeta); }
+.bg-orange { background: rgba(230,126,34,.12); color: var(--naranja); }
+.prod-title { font-size: 20px; font-weight: 800; color: var(--azul); margin-bottom: .4rem; }
+.prod-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1.2rem; }
+.feat-list { list-style: none; }
+.feat-list li { font-size: 13px; color: var(--text); padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
+.feat-list li:last-child { border-bottom: none; }
+.feat-list li::before { content: '✓'; color: var(--verde); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.prod-right { display: flex; flex-direction: column; gap: 10px; }
+.rc { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+.rc-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text2); margin-bottom: 4px; }
+.rc-text { font-size: 13px; font-weight: 600; color: var(--azul); }
+.rc-text.light { font-weight: 400; line-height: 1.6; color: var(--text); }
+
+/* ROLE CHIPS (DCO) */
+.role-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 1rem; }
+.role-chip { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 10px; text-align: center; }
+.role-chip .ri { font-size: 20px; margin-bottom: 4px; }
+.role-chip .rn { font-size: 12px; font-weight: 700; color: var(--azul); }
+.role-chip .rd { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* TAB CHIPS (TaskForce) */
+.tab-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 1rem; }
+.tab-chip { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 9px 8px; text-align: center; font-size: 11px; font-weight: 600; color: var(--azul); }
+.tab-chip span { display: block; font-size: 16px; margin-bottom: 2px; }
+
+/* CALC BOX (DCO staffing calculator) */
+.calc-box { background: linear-gradient(135deg,#f0fdfa,#eff6ff); border: 1px solid rgba(13,148,136,.25); border-radius: 16px; padding: 2rem 2.4rem; margin-top: 1.5rem; }
+.calc-box h3 { font-size: 17px; font-weight: 800; color: var(--teal); margin-bottom: .6rem; }
+.calc-box p { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 1rem; }
+.calc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.calc-item { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; }
+.calc-num { font-size: 20px; font-weight: 800; color: var(--teal); line-height: 1; margin-bottom: 3px; }
+.calc-lbl { font-size: 10px; color: var(--text2); }
+
+/* HOW IT WORKS */
+.steps { counter-reset: step; margin-top: 2.5rem; }
+.step { display: flex; gap: 1.2rem; margin-bottom: 1.5rem; align-items: flex-start; }
+.step-num { counter-increment: step; width: 36px; height: 36px; border-radius: 50%; background: var(--azul); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex-shrink: 0; }
+.step-body h3 { font-size: 14px; font-weight: 700; color: var(--azul); margin-bottom: .2rem; }
+.step-body p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* TRANSFORM */
+.transform-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin-top: 2.5rem; }
+.transform-col h3 { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+.transform-col.before h3 { color: var(--rojo); }
+.transform-col.after  h3 { color: var(--verde); }
+.t-item { display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
+.t-item.neg { background: rgba(192,57,43,.06); color: var(--text); border: 1px solid rgba(192,57,43,.15); }
+.t-item.pos { background: rgba(39,174,96,.06); color: var(--text); border: 1px solid rgba(39,174,96,.15); }
+.transform-arrow { font-size: 28px; color: var(--azul2); text-align: center; }
+
+/* ROI */
+.roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 2.5rem; }
+.roi-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; text-align: center; }
+.roi-num { font-size: 32px; font-weight: 800; color: var(--azul2); line-height: 1; margin-bottom: .4rem; }
+.roi-label { font-size: 12px; color: var(--text2); }
+.roi-highlight { background: linear-gradient(135deg,#e8f5e9,#f0f7ff); border: 1px solid rgba(39,174,96,.3); border-radius: 12px; padding: 1.8rem 2rem; text-align: center; margin-top: 1.5rem; }
+.roi-highlight p { font-size: 14px; color: var(--azul); line-height: 1.7; }
+.roi-highlight strong { color: var(--verde); font-size: 16px; }
+
+/* FAQ */
+.faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+.faq-q { padding: 14px 16px; font-size: 14px; font-weight: 600; color: var(--azul); cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: var(--bg); user-select: none; }
+.faq-q:hover { background: var(--bg3); }
+.faq-q .arrow { transition: transform .2s; font-size: 12px; color: var(--text2); }
+.faq-q.open .arrow { transform: rotate(180deg); }
+.faq-a { display: none; padding: 0 16px 14px; font-size: 13px; color: var(--text2); line-height: 1.7; background: var(--bg); }
+.faq-a.visible { display: block; }
+
+/* CTA */
+.cta-final { background: linear-gradient(135deg, var(--azul) 0%, #1e5f8e 100%); border-radius: 20px; padding: 4rem 2rem; text-align: center; color: #fff; margin: 3rem 0; }
+.cta-final h2 { font-size: clamp(22px,4vw,34px); font-weight: 800; margin-bottom: 1rem; }
+.cta-final p { font-size: 15px; opacity: .88; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+
+/* FOOTER */
+footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--text2); border-top: 1px solid var(--border); }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .product-card { grid-template-columns: 1fr; }
+  .transform-grid { grid-template-columns: 1fr; }
+  .transform-arrow { transform: rotate(90deg); }
+  nav .nav-links { display: none; }
+  section { padding: 3rem 1.2rem; }
+  .phase-strip { flex-direction: column; }
+  .phase-block { border-right: none; border-bottom: 1px solid var(--border); }
+  .role-grid { grid-template-columns: 1fr; }
+  .tab-grid { grid-template-columns: repeat(2,1fr); }
+  .calc-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Talento <span>3D</span></div>
+  <div class="nav-links">
+    <a href="#oportunidad">La oportunidad</a>
+    <a href="#herramientas">Las herramientas</a>
+    <a href="#dco">Diagnóstico DCO</a>
+    <a href="#taskforce">Simulador de dotación</a>
+    <a href="#modelo">Modelo de negocio</a>
+    <a href="#faq">Preguntas</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Para estudios con cartera de clientes Pyme · Nueva unidad de negocio</div>
+  <h1>Ya tenés la confianza de tus clientes Pyme.<br><em>Te falta una herramienta para venderles esto.</em></h1>
+  <p>Todo dueño de Pyme sabe que su equipo pierde horas en algún lado y que no sabe bien cuántas personas necesita para el próximo pico. Hoy nadie en tu cartera de clientes les resuelve eso. Talento 3D te da las herramientas para ofrecerlo vos, desde el lugar de confianza que ya tenés como estudio.</p>
+  <div class="hero-cta">
+    <a href="#herramientas" class="btn-primary">Ver las dos herramientas →</a>
+    <a href="#modelo" class="btn-ghost">Cómo se monetiza</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><strong>2</strong><span>Herramientas listas para usar</span></div>
+    <div class="stat"><strong>1</strong><span>Cartera de clientes que ya confía en vos</span></div>
+    <div class="stat"><strong>0</strong><span>Desarrollo propio necesario</span></div>
+    <div class="stat"><strong>+1</strong><span>Línea de servicio nueva y recurrente</span></div>
+  </div>
+</div>
+
+<!-- OPORTUNIDAD -->
+<section id="oportunidad">
+  <div class="section-label">La oportunidad</div>
+  <h2 class="section-title">Cada Pyme de tu cartera tiene<br>el mismo problema. Y hoy no se lo resuelve nadie.</h2>
+  <p class="section-sub">Bodegas, distribuidoras, empresas de agro, retail, industria — no importa el rubro: todo dueño de Pyme sabe que su equipo pierde horas en algún lado y no sabe con certeza cuánta gente necesita para el próximo pico de producción, cosecha o temporada. Hoy resuelven eso por intuición, o no lo resuelven.</p>
+
+  <div class="pain-grid">
+    <div class="pain-card"><div class="pain-icon">📈</div><h3>Picos estacionales que desbordan</h3><p>Cosecha, temporada alta, un pedido grande que entra de golpe — y siempre se resuelve a fuerza de horas extra del mismo grupo de gente.</p></div>
+    <div class="pain-card"><div class="pain-icon">⏱️</div><h3>Horas pagas que nadie mide</h3><p>Entre sistemas que traban, interrupciones y reprocesos, nadie en la Pyme sabe cuánto del tiempo que paga es realmente productivo.</p></div>
+    <div class="pain-card"><div class="pain-icon">🧑‍💼</div><h3>¿Contratar o resolver un proceso roto?</h3><p>Cuando el equipo no da abasto, la respuesta automática es "hace falta una persona más". A veces sí. A veces el problema es un proceso que nadie relevó.</p></div>
+    <div class="pain-card"><div class="pain-icon">🔀</div><h3>Interrupciones y reprocesos invisibles</h3><p>Tiempo perdido por errores de carga, consultas cruzadas, tareas que se rehacen — nada de esto aparece en ningún reporte de RRHH ni de costos.</p></div>
+    <div class="pain-card"><div class="pain-icon">🚨</div><h3>Emergencias sin plan armado</h3><p>Un pedido urgente, una baja inesperada, un pico que se adelanta. Se resuelve reasignando gente a los ponchazos, sin un escenario pensado de antemano.</p></div>
+    <div class="pain-card"><div class="pain-icon">📋</div><h3>Decisiones de dotación a ojo</h3><p>¿Cuánta gente hace falta para la próxima temporada? ¿Alcanza con redistribuir tareas? Hoy se decide por intuición del dueño, no con números.</p></div>
+  </div>
+</section>
+
+<!-- REVEAL -->
+<div style="background:var(--bg3);padding:2rem;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="reveal-box">
+      <h2>Ese diagnóstico, hoy, lo podés vender vos.</h2>
+      <p>Ya sos el asesor de confianza de tu cartera de Pymes. Con Talento 3D sumás un diagnóstico real de capacidad operativa y un simulador de dotación por escenario — una línea de servicio nueva, recurrente, y que ningún competidor de tu cartera está ofreciendo hoy.</p>
+      <div class="reveal-pillars">
+        <div class="pillar"><div class="p-icon">🔍</div><div class="p-name">Diagnosticás</div><div class="p-sub">Dónde se va el tiempo real</div></div>
+        <div class="pillar"><div class="p-icon">🧮</div><div class="p-name">Calculás</div><div class="p-sub">La dotación que hace falta</div></div>
+        <div class="pillar"><div class="p-icon">🚀</div><div class="p-name">Simulás</div><div class="p-sub">Cada escenario y cada pico</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERRAMIENTAS OVERVIEW -->
+<section id="herramientas">
+  <div class="section-label">Las dos herramientas</div>
+  <h2 class="section-title">Un diagnóstico del presente.<br>Un simulador para el futuro.</h2>
+  <p class="section-sub">Son las dos herramientas que le ofrecés a cada Pyme de tu cartera. El diagnóstico (DCO) muestra la foto real de cómo trabaja el equipo del cliente hoy. El simulador (TaskForce) le permite planificar la dotación para cada temporada, proyecto o pico de demanda.</p>
+
+  <div class="phase-strip">
+    <div class="phase-block">
+      <div class="ph-num">Herramienta 1</div>
+      <div class="ph-badge ph-done">✅ Diagnóstico</div>
+      <span class="ph-icon">🔍</span>
+      <div class="ph-name">DCO — Capacidad Operativa</div>
+      <div class="ph-items">Relevamiento real de tiempo, fricción y capacidad por colaborador</div>
+    </div>
+    <div class="phase-block">
+      <div class="ph-num">Herramienta 2</div>
+      <div class="ph-badge ph-done">✅ Planificación</div>
+      <span class="ph-icon">🚀</span>
+      <div class="ph-name">TaskForce — Simulador de Dotación</div>
+      <div class="ph-items">Presupuesto, turnos, contratación y modo emergencia por proyecto</div>
+    </div>
+  </div>
+</section>
+
+<!-- DCO -->
+<section id="dco" style="padding-top:0">
+
+  <div class="mod-header" style="background:linear-gradient(135deg,#f0fdfa,#eff6ff);border-left:4px solid var(--teal);">
+    <div class="mod-header-icon">🔍</div>
+    <div>
+      <div class="mod-header-title" style="color:var(--teal);">DCO — Diagnóstico de Capacidad Operativa</div>
+      <div class="mod-header-sub">La foto real de cómo el equipo usa su tiempo, hoy</div>
+    </div>
+  </div>
+
+  <div class="product-card top-teal">
+    <div>
+      <div class="prod-badge bg-teal">Diagnóstico · 3 roles</div>
+      <div class="prod-title">Relevamiento con tres miradas cruzadas</div>
+      <div class="prod-desc">Cada colaborador de la Pyme cliente completa su propio relevamiento: qué actividades hace, qué porcentaje de tiempo consume cada una, dónde pierde tiempo por sistemas o interrupciones. El jefe valida y detecta brechas de capacidad. Vos, como consultor, ves el diagnóstico consolidado del área.</div>
+      <ul class="feat-list">
+        <li>Actividades y entregables con % de tiempo real por tarea</li>
+        <li>Fricción por sistema: ERP, planillas, herramientas del rubro</li>
+        <li>Interrupciones y reprocesos — horas semanales perdidas</li>
+        <li>Autopercepción de capacidades vs. evaluación del jefe</li>
+        <li>Estacionalidad: factor y duración de los picos de carga</li>
+        <li>Motivación y qué cambiarían primero de cómo trabajan</li>
+      </ul>
+    </div>
+    <div class="prod-right">
+      <div class="role-grid">
+        <div class="role-chip"><div class="ri">🧑‍💼</div><div class="rn">Colaborador</div><div class="rd">Completa su relevamiento</div></div>
+        <div class="role-chip"><div class="ri">👔</div><div class="rn">Jefe / Líder</div><div class="rd">Valida y marca brechas</div></div>
+        <div class="role-chip"><div class="ri">📊</div><div class="rn">Consultor</div><div class="rd">Diagnóstico y dotación</div></div>
+      </div>
+      <div class="rc"><div class="rc-label">Lo que obtiene el dueño de la Pyme</div><div class="rc-text">Ve exactamente cuánto tiempo de su equipo es productivo, y cuánto se pierde en fricción o reprocesos.</div></div>
+      <div class="rc"><div class="rc-label">Lo que obtenés vos como estudio</div><div class="rc-text">Un servicio de diagnóstico que hoy no le vende nadie a tu cartera — con el panel de consultor a tu nombre.</div></div>
+    </div>
+  </div>
+
+  <div class="calc-box">
+    <h3>🧮 Calculadora de dotación</h3>
+    <p>Con los datos del relevamiento, tu panel de consultor calcula automáticamente cuánto tiempo productivo real tiene el área del cliente, y cuánto se recupera resolviendo fricción sistémica — antes de recomendarle si hace falta contratar.</p>
+    <div class="calc-grid">
+      <div class="calc-item"><div class="calc-num">🕒</div><div class="calc-lbl">Horas totales disponibles / semana</div></div>
+      <div class="calc-item"><div class="calc-num">📉</div><div class="calc-lbl">Pérdida por fricción + reprocesos</div></div>
+      <div class="calc-item"><div class="calc-num">✅</div><div class="calc-lbl">Tiempo recuperable sin contratar</div></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TASKFORCE -->
+<section id="taskforce" style="padding-top:0">
+
+  <div class="mod-header" style="background:linear-gradient(135deg,#f5f3ff,#eff6ff);border-left:4px solid var(--violeta);">
+    <div class="mod-header-icon">🚀</div>
+    <div>
+      <div class="mod-header-title" style="color:var(--violeta);">TaskForce — Simulador de Dotación por Proyecto</div>
+      <div class="mod-header-sub">Planificá el equipo antes de que llegue el pico, no durante</div>
+    </div>
+  </div>
+
+  <div class="product-card top-violet">
+    <div>
+      <div class="prod-badge bg-violet">Simulador · Modo proyecto y cartera</div>
+      <div class="prod-title">Cada escenario, antes de vivirlo</div>
+      <div class="prod-desc">Para cada Pyme de tu cartera: diseñá la estructura de su equipo, cargá presupuesto y turnos, y simulá cómo responde la dotación ante distintos escenarios — desde la temporada normal hasta un modo emergencia por un pico de demanda que se adelanta o un pedido grande que entra de golpe.</div>
+      <ul class="feat-list">
+        <li>Diseño organizacional y configuración del proyecto o temporada</li>
+        <li>Matriz de habilidades y asignación por skill</li>
+        <li>Presupuesto, turnos y plan de contratación</li>
+        <li>Mapa de riesgos por escenario</li>
+        <li>Modo emergencia — reasignación rápida ante un pico inesperado</li>
+        <li>Comparativa de escenarios y plantillas reutilizables</li>
+      </ul>
+    </div>
+    <div class="prod-right">
+      <div class="tab-grid">
+        <div class="tab-chip"><span>💰</span>Presupuesto</div>
+        <div class="tab-chip"><span>🕒</span>Turnos</div>
+        <div class="tab-chip"><span>📋</span>Contratación</div>
+        <div class="tab-chip"><span>🛡️</span>Riesgos</div>
+        <div class="tab-chip"><span>📊</span>Dashboard</div>
+        <div class="tab-chip"><span>📋</span>Comparativa</div>
+        <div class="tab-chip"><span>📁</span>Plantillas</div>
+        <div class="tab-chip"><span>🚨</span>Emergencia</div>
+      </div>
+      <div class="rc"><div class="rc-label">Lo que obtiene el dueño de la Pyme</div><div class="rc-text">Un dashboard con el costo y el riesgo de cada escenario de dotación, antes de comprometerse con un pedido o una temporada.</div></div>
+    </div>
+  </div>
+
+  <div class="calc-box" style="background:linear-gradient(135deg,#f5f3ff,#eff6ff);border-color:rgba(124,58,237,.25);">
+    <h3 style="color:var(--violeta);">📁 Plantillas por tipo de Pyme</h3>
+    <p>Se guardan configuraciones reutilizables: dotación tipo para temporada alta de una bodega, para un pico de producción en una distribuidora, o para la carga habitual entre picos — para no rearmar el escenario cada vez que atendés a un nuevo cliente de tu cartera.</p>
+  </div>
+
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como">
+  <div class="section-label">Cómo funciona</div>
+  <h2 class="section-title">De ofrecérselo a un cliente,<br>a entregarle un diagnóstico, en cuatro pasos.</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num"></div>
+      <div class="step-body"><h3>Se lo proponés a un cliente de tu cartera</h3><p>Un dueño de Pyme al que ya le llevás la contabilidad o los temas legales — le ofrecés el diagnóstico de capacidad operativa como un servicio adicional, no como algo ajeno.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num"></div>
+      <div class="step-body"><h3>Relevamiento del equipo del cliente (DCO)</h3><p>Cada colaborador de esa Pyme completa su relevamiento por un link — actividades, tiempo real, fricción e interrupciones. Sin planillas sueltas ni entrevistas interminables.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num"></div>
+      <div class="step-body"><h3>Vos armás el diagnóstico consolidado</h3><p>Tu panel de consultor muestra tiempo productivo real, fricción sistémica y recomendaciones priorizadas — con la calculadora de cuánto se recupera sin contratar.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num"></div>
+      <div class="step-body"><h3>Le simulás los escenarios de dotación (TaskForce)</h3><p>Con el diagnóstico como base, le mostrás al dueño los escenarios de dotación para la próxima temporada o el próximo pico — con presupuesto y riesgos incluidos. Ahí se abre la conversación de honorarios recurrentes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORM -->
+<section style="padding-top:0">
+  <div class="section-label">El cambio</div>
+  <h2 class="section-title">De ser el estudio que hace números,<br>a ser el estudio que también ordena el equipo.</h2>
+
+  <div class="transform-grid">
+    <div class="transform-col before">
+      <h3>Hoy</h3>
+      <div class="t-item neg">😓 Le llevás la contabilidad o lo legal, pero la gestión de su equipo queda afuera</div>
+      <div class="t-item neg">📄 Cuando el cliente pregunta "¿necesito contratar?", no tenés con qué responder</div>
+      <div class="t-item neg">🚨 Ese servicio se lo termina dando —o no— una consultora de RRHH que no lo conoce</div>
+      <div class="t-item neg">🔁 La relación con el cliente queda limitada a la obligación fiscal o legal</div>
+    </div>
+    <div class="transform-arrow">→</div>
+    <div class="transform-col after">
+      <h3>Con Talento 3D</h3>
+      <div class="t-item pos">📊 Le sumás un diagnóstico de capacidad operativa con tu marca</div>
+      <div class="t-item pos">🔍 Podés responder con datos si el cliente necesita contratar o no</div>
+      <div class="t-item pos">🛡️ El simulador de dotación se convierte en un servicio recurrente por temporada</div>
+      <div class="t-item pos">📁 Profundizás la relación con cada Pyme de tu cartera, en vez de perderla a manos de un tercero</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELO DE NEGOCIO -->
+<section id="modelo">
+  <div class="section-label">Modelo de negocio</div>
+  <h2 class="section-title">Una unidad de negocio nueva,<br>sobre la cartera que ya tenés.</h2>
+  <p class="section-sub">No hace falta salir a buscar clientes nuevos. La oportunidad está en la cartera que el estudio ya atiende — cada Pyme que hoy paga honorarios por contabilidad o asesoría legal es una candidata directa para este servicio.</p>
+
+  <div class="roi-grid">
+    <div class="roi-card"><div class="roi-num">🎯</div><div class="roi-label">Cliente cautivo: ya confía en el estudio</div></div>
+    <div class="roi-card"><div class="roi-num">🔁</div><div class="roi-label">Servicio recurrente por temporada, no un proyecto único</div></div>
+    <div class="roi-card"><div class="roi-num">🧩</div><div class="roi-label">Complementa — no compite con — lo que ya le facturás</div></div>
+    <div class="roi-card"><div class="roi-num">🚀</div><div class="roi-label">Diferencial frente a otros estudios de la zona</div></div>
+  </div>
+
+  <div class="roi-highlight">
+    <p>El estudio no necesita convertirse en consultora de RRHH. Solo necesita las dos herramientas — el diagnóstico y el simulador — para <strong>ofrecer algo que hoy ningún competidor le ofrece a la misma cartera</strong>.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Preguntas frecuentes</div>
+  <h2 class="section-title">Todo lo que un dueño de estudio<br>pregunta antes de decidir.</h2>
+
+  <div style="margin-top:2rem">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">¿El estudio se convierte en una consultora de RRHH?<span class="arrow">▼</span></div>
+      <div class="faq-a">No hace falta. Las herramientas hacen el trabajo pesado — relevamiento, consolidación de datos, cálculo de dotación y simulación de escenarios. El estudio ofrece el servicio y entrega el diagnóstico; no necesita construir un área de RRHH interna para hacerlo.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Compite con lo que ya le facturamos a nuestros clientes?<span class="arrow">▼</span></div>
+      <div class="faq-a">No. Es una capa distinta: no toca la contabilidad, la liquidación de sueldos ni la parte legal. Es información que hoy nadie en la cartera del cliente le está dando — cuánto tiempo real tiene su equipo y cuánta gente necesita. Se suma como servicio adicional, no reemplaza nada existente.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Cuánto tiempo lleva el diagnóstico de un cliente?<span class="arrow">▼</span></div>
+      <div class="faq-a">El relevamiento de cada colaborador de la Pyme se completa en una sesión, desde un link. Una vez que el equipo lo completa y el jefe valida, tu panel de consultor consolida el diagnóstico y la calculadora de dotación automáticamente — no hay procesamiento manual de por medio.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Sirve para cualquier rubro de Pyme, o solo para algunos?<span class="arrow">▼</span></div>
+      <div class="faq-a">Sirve para cualquier rubro — bodegas, agro, distribución, retail, industria, servicios. El relevamiento se adapta a las actividades reales de cada equipo, y el simulador de dotación funciona igual para un pico de cosecha que para un pico de pedidos en un local.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Cómo se cobra este servicio a los clientes?<span class="arrow">▼</span></div>
+      <div class="faq-a">Cada estudio define su propio esquema — como un proyecto puntual de diagnóstico, como un honorario recurrente por temporada, o como parte de un paquete de asesoría ampliada. Lo importante es que hoy ese ingreso no existe en la relación con el cliente, y con estas herramientas se puede abrir.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Cómo se lo planteo primero a un cliente, sin que suene a venta forzada?<span class="arrow">▼</span></div>
+      <div class="faq-a">Se plantea como una pregunta que todo dueño de Pyme se hace solo: "¿sabés cuánta gente necesitás para la próxima temporada?". Ese es el gancho — y este material está armado justamente para esa primera conversación, tanto con el cliente como puertas adentro del estudio.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section style="max-width:100%;padding:4rem 2rem;background:var(--bg3);">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="cta-final">
+      <h2>¿Y si tu próxima línea<br>de negocio ya está en tu cartera?</h2>
+      <p>Coordinemos una sesión para mostrarte las dos herramientas en funcionamiento y pensar juntos cómo se arma esta unidad de negocio con tus clientes Pyme actuales.</p>
+      <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:1.2rem 1.6rem;max-width:480px;margin:0 auto 2rem;text-align:left;">
+        <p style="font-size:13px;opacity:.9;margin-bottom:.6rem;font-weight:600;">En la sesión vemos:</p>
+        <div style="font-size:13px;opacity:.85;display:grid;gap:6px;">
+          <span>✓ Demo del diagnóstico DCO y el simulador TaskForce</span>
+          <span>✓ Cómo se arma el flujo con un primer cliente piloto de tu cartera</span>
+          <span>✓ Opciones de cómo cobrar el servicio</span>
+          <span>✓ Qué necesita el estudio para empezar a ofrecerlo</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://wa.me/5492615334983?text=Hola%20C%C3%A9sar%2C%20vi%20el%20material%20de%20Talento%203D%20como%20nueva%20unidad%20de%20negocio%20para%20estudios%20con%20cartera%20de%20clientes%20Pyme%20y%20me%20interesa%20coordinar%20una%20sesi%C3%B3n.%20%C2%BFHablamos%3F" target="_blank"
+           style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.528 5.855L.057 23.617a.75.75 0 00.921.921l5.762-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.964-1.361l-.356-.212-3.688.942.958-3.597-.231-.371A9.721 9.721 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+          </svg>
+          Coordinar una sesión
+        </a>
+      </div>
+      <p style="font-size:11px;opacity:.6;margin-top:1rem">Sin compromiso · Respondemos en menos de 24 horas</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Talento 3D</strong> · Diagnosticamos · Calculamos · Simulamos</p>
+  <p style="margin-top:4px">Nueva unidad de negocio para estudios con cartera de clientes Pyme · Argentina</p>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('visible');
+}
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--azul)' : '';
+    a.style.background = a.getAttribute('href') === '#'+current ? 'var(--bg3)' : '';
+  });
+});
+document.querySelectorAll('.step-num').forEach((el,i) => { el.textContent = i+1; });
+</script>
+</body>
+</html>
