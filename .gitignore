@@ -11,3 +11,6 @@ Tutor.env
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# Ignorar virtualenv en backend
+backend/ven/
