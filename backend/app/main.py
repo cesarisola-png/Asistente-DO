@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-cliente = Groq(api_key=config.GROQ_API_KEY)
+client = Groq(api_key=config.GROQ_API_KEY)
 MODELO = config.MODELO
 
 class MensajeRequest(BaseModel):
