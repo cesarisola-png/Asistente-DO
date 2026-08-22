@@ -47,18 +47,22 @@ if prompt := st.chat_input("¿En qué proceso o estructura quieres profundizar h
         with st.spinner("Analizando componentes organizacionales..."):
             try:
                 response = requests.post(BACKEND_URL, json=payload)
-                if response.status_code == 200:
-                    data = response.json()
-                    respuesta_texto = data.get("respuesta", "")
-                    pilares = data.get("pilares_mencionados", [])
+                # CÓDIGO NUEVO (Muestra el detalle del error):
+if response.status_code == 200:
+    data = response.json()
+    respuesta_texto = data.get("respuesta", "")
+    pilares = data.get("pilares_mencionados", [])
 
-                    st.markdown(respuesta_texto)
-                    
-                    if pilares:
-                        st.caption(f"📌 Pilares identificados en este análisis: {', '.join(pilares)}")
+    st.markdown(respuesta_texto)
+    
+    if pilares:
+        st.caption(f"📌 Pilares identificados en este análisis: {', '.join(pilares)}")
 
-                    st.session_state.messages.append({"role": "assistant", "content": respuesta_texto})
-                else:
-                    st.error(f"Error en la API backend: {response.status_code}")
-            except Exception as e:
-                st.error(f"No se pudo conectar con el servidor backend: {e}")
+    st.session_state.messages.append({"role": "assistant", "content": respuesta_texto})
+else:
+    # Capturamos el mensaje exacto que nos envía FastAPI
+    try:
+        detalle_error = response.json().get("detail", response.text)
+    except:
+        detalle_error = response.text
+    st.error(f"Error en la API backend ({response.status_code}): {detalle_error}")
