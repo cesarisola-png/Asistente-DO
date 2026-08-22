@@ -86,28 +86,25 @@ def root():
 @app.post("/chat", response_model=ChatResponse)
 async def responder_chat(solicitud: MensajeRequest):
     try:
-        # 1. Obtener prompt del sistema según el nivel seleccionad
+        # 1. Obtener el prompt del sistema según el nivel
         prompt_sistema = obtener_prompt_por_nivel(solicitud.nivel)
-        
-        # Asegurar que prompt_sistema sea un string
         if isinstance(prompt_sistema, dict):
             prompt_sistema = prompt_sistema.get("prompt", str(prompt_sistema))
 
-        # 2. Armar los mensajes incluyendo el historial previo
         mensajes = [{"role": "system", "content": str(prompt_sistema)}]
 
-        # Agregar el historial enviado desde el frontend
+        # 2. Agregar historial si viene en la solicitud
         if solicitud.historial:
             for msg in solicitud.historial:
-                mensajes.append({
-                    "role": msg.get("role", "user"),
-                    "content": str(msg.get("content", ""))
-                })
+                rol = msg.get("role", "user")
+                contenido = msg.get("content", "")
+                if contenido:
+                    mensajes.append({"role": str(rol), "content": str(contenido)})
 
-        # Agregar el mensaje actual del usuario
+        # 3. Agregar el mensaje actual del usuario
         mensajes.append({"role": "user", "content": str(solicitud.mensaje)})
 
-        # 3. Llamar a Groq API
+        # 4. Llamada a la API de Groq
         chat_completion = client.chat.completions.create(
             messages=mensajes,
             model=config.MODELO,
@@ -116,7 +113,7 @@ async def responder_chat(solicitud: MensajeRequest):
 
         respuesta_texto = chat_completion.choices[0].message.content
 
-        # 4. Retornar coincidiendo exactamente con ChatResponse
+        # 5. Retornar la respuesta en el formato exacto de ChatResponse
         return {
             "respuesta": respuesta_texto,
             "nivel_usado": solicitud.nivel,
@@ -124,8 +121,8 @@ async def responder_chat(solicitud: MensajeRequest):
         }
 
     except Exception as e:
-        # Devuelve el texto exacto del error en lugar de fallar a ciegas
-        raise HTTPException(status_code=500, detail=f"Error en backend: {str(e)}")
+        # Esto nos devolverá el detalle exacto del error en lugar de un 500 genérico
+        raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
     
 async def chat(request: MensajeRequest):
     try:
