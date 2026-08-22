@@ -27,49 +27,48 @@ for message in st.session_state.messages:
 
 # Entrada de usuario
 if prompt := st.chat_input("¿En qué proceso o estructura quieres profundizar hoy?"):
+    # Mostrar mensaje del usuario
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Preparar el payload enviando el historial previo en el formato esperado por FastAPI
-    historial_backend = [
-        {"role": msg["role"], "content": msg["content"]} 
-        for msg in st.session_state.messages[:-1]
-    ]
-
+    # Preparar datos para el backend
     payload = {
         "mensaje": prompt,
         "nivel": nivel_seleccionado,
-        "historial": historial_backend
+        "historial": [
+            {"role": m["role"], "content": m["content"]}
+            for m in st.session_state.messages[:-1]
+        ]
     }
 
+    # Procesar respuesta del asistente
     with st.chat_message("assistant"):
-        with st.spinner("Analizando componentes organizacionales..."):
-            
+        with st.spinner("Analizando respuesta..."):
             try:
                 response = requests.post(
-                f"{BACKEND_URL}/chat",
-                json=payload,
-                timeout=30
-    )
-    
-    if response.status_code == 200:
-        data = response.json()
-        respuesta_texto = data.get("respuesta", "")
-        pilares = data.get("pilares_mencionados", [])
+                    f"{BACKEND_URL}/chat",
+                    json=payload,
+                    timeout=30
+                )
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    respuesta_texto = data.get("respuesta", "")
+                    pilares = data.get("pilares_mencionados", [])
 
-        st.markdown(respuesta_texto)
-        
-        if pilares:
-            st.caption(f"📌 Pilares identificados en este análisis: {', '.join(pilares)}")
+                    st.markdown(respuesta_texto)
+                    
+                    if pilares:
+                        st.caption(f"📌 Pilares identificados: {', '.join(pilares)}")
 
-        st.session_state.messages.append({"role": "assistant", "content": respuesta_texto})
-    else:
-        try:
-            detalle_error = response.json().get("detail", response.text)
-        except Exception:
-            detalle_error = response.text
-        st.error(f"Error en la API backend ({response.status_code}): {detalle_error}")
+                    st.session_state.messages.append({"role": "assistant", "content": respuesta_texto})
+                else:
+                    try:
+                        detalle = response.json().get("detail", response.text)
+                    except Exception:
+                        detalle = response.text
+                    st.error(f"Error en la API backend ({response.status_code}): {detalle}")
 
-except Exception as e:
-    st.error(f"No se pudo conectar con el servidor: {str(e)}")
+            except Exception as e:
+                st.error(f"No se pudo conectar con el servidor: {str(e)}")
