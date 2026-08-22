@@ -84,6 +84,30 @@ def root():
     }
 
 @app.post("/chat", response_model=ChatResponse)
+@app.post("/chat")
+async def responder_chat(solicitud: ChatRequest):
+    try:
+        # Construcción de los mensajes
+        prompt_sistema = obtener_prompt_por_nivel(solicitud.nivel)
+        
+        mensajes = [
+            {"role": "system", "content": prompt_sistema},
+            {"role": "user", "content": solicitud.mensaje}
+        ]
+
+        # Llamada a la API de Groq
+        chat_completion = client.chat.completions.create(
+            messages=mensajes,
+            model=config.MODELO,
+            temperature=0.7,
+        )
+
+        respuesta_texto = chat_completion.choices[0].message.content
+        return {"respuesta": respuesta_texto}
+
+    except Exception as e:
+        # Esto captura el error y evita el 500 genérico sin información
+        raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
 async def chat(request: MensajeRequest):
     try:
         if request.nivel not in ["Inicial", "Intermedio", "Experto"]:
