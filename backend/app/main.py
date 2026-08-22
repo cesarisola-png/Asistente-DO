@@ -84,8 +84,7 @@ def root():
     }
 
 @app.post("/chat", response_model=ChatResponse)
-@app.post("/chat")
-async def responder_chat(solicitud: ChatRequest):
+async def responder_chat(solicitud: MensajeRequest):
     try:
         # Construcción de los mensajes
         prompt_sistema = obtener_prompt_por_nivel(solicitud.nivel)
@@ -103,11 +102,17 @@ async def responder_chat(solicitud: ChatRequest):
         )
 
         respuesta_texto = chat_completion.choices[0].message.content
-        return {"respuesta": respuesta_texto}
+        
+        # Devolvemos la estructura exacta que exige ChatResponse
+        return {
+            "respuesta": respuesta_texto,
+            "nivel_usado": solicitud.nivel,
+            "pilares_mencionados": []
+        }
 
     except Exception as e:
-        # Esto captura el error y evita el 500 genérico sin información
-        raise HTTPException(status_code=500, detail=f"Error en el servidor: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+    
 async def chat(request: MensajeRequest):
     try:
         if request.nivel not in ["Inicial", "Intermedio", "Experto"]:
