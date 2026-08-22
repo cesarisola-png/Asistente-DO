@@ -83,6 +83,14 @@ def root():
         "estado": "Operativo"
     }
 
+def obtener_prompt_por_nivel(nivel: str) -> str:
+    prompts = {
+        "Inicial": "Eres un consultor experto en Diseño Organizacional (Modelo de las Estrellas de Jay Galbraith). Responde de forma clara, didáctica y estructurada.",
+        "Intermedio": "Eres un consultor senior en Diseño Organizacional (Modelo de las Estrellas de Jay Galbraith). Ofrece un análisis técnico, equilibrado y con recomendaciones prácticas.",
+        "Experto": "Eres un consultor elite en Diseño Organizacional (Modelo de las Estrellas de Jay Galbraith). Proporciona un diagnóstico estratégico profundo, metodológico y riguroso."
+    }
+    return prompts.get(nivel, prompts["Intermedio"])
+
 @app.post("/chat", response_model=ChatResponse)
 async def responder_chat(solicitud: MensajeRequest):
     try:
@@ -121,7 +129,6 @@ async def responder_chat(solicitud: MensajeRequest):
         }
 
     except Exception as e:
-        # Esto nos devolverá el detalle exacto del error en lugar de un 500 genérico
         raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
     
 async def chat(request: MensajeRequest):
