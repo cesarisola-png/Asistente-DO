@@ -8,7 +8,7 @@ load_dotenv(env_path)
 
 class Config:
     GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-    MODELO = "llama-3.1-8b-instant"
+    MODELO = "llama-3.3-70b-versatile"
     
     if not GROQ_API_KEY:
         raise ValueError("❌ GROQ_API_KEY no encontrada. Asegúrate de tener Tutor.env dentro de /backend")
