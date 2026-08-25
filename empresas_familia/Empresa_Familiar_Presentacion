@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gobierno y Continuidad en la Empresa Familiar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;0,900;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --ink:#20263a;
+    --ink2:#454e68;
+    --bronze:#a8763e;
+    --bronze-l:#c99b5f;
+    --olive:#69745a;
+    --cream:#faf6ef;
+    --paper:#ffffff;
+    --line:#e5ddcd;
+    --text2:#6d6558;
+    --serif:'Fraunces',serif;
+    --sans:'Inter',-apple-system,sans-serif;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);font-size:15px;line-height:1.65;}
+
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(250,246,239,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:0 2.2rem;height:60px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.2px;}
+  .brand em{font-style:italic;color:var(--bronze);}
+  .nav-btn{
+    font-size:12.5px;font-weight:600;text-decoration:none;color:#fff;
+    background:var(--ink);padding:9px 20px;border-radius:3px;transition:background .15s;
+  }
+  .nav-btn:hover{background:var(--bronze);}
+
+  section{padding:5rem 2rem;max-width:1040px;margin:0 auto;}
+
+  /* HERO */
+  .hero{
+    max-width:100%;padding:9rem 2rem 3rem;text-align:center;
+    display:flex;flex-direction:column;align-items:center;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--bronze);margin-bottom:1.4rem;
+  }
+  .hero h1{
+    font-family:var(--serif);font-weight:700;color:var(--ink);
+    font-size:clamp(28px,4.6vw,46px);line-height:1.22;max-width:760px;margin-bottom:1.3rem;
+  }
+  .hero h1 em{font-style:italic;color:var(--bronze);font-weight:600;}
+  .hero p.lead{font-size:16.5px;color:var(--text2);max-width:580px;margin-bottom:2.4rem;}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:3.5rem;}
+  .btn-solid{
+    background:var(--ink);color:#fff;padding:14px 30px;border-radius:3px;
+    font-size:13.5px;font-weight:600;text-decoration:none;transition:background .15s;
+  }
+  .btn-solid:hover{background:var(--bronze);}
+  .btn-line{
+    border:1.5px solid var(--ink);color:var(--ink);padding:12.5px 30px;border-radius:3px;
+    font-size:13.5px;font-weight:600;text-decoration:none;transition:all .15s;
+  }
+  .btn-line:hover{background:var(--ink);color:#fff;}
+
+  /* VENN DIAGRAM */
+  .venn-wrap{max-width:460px;width:100%;margin:0 auto;}
+  .venn-caption{font-size:12px;color:var(--text2);margin-top:.8rem;font-style:italic;}
+
+  /* INTRO / PROBLEM */
+  .intro{text-align:center;}
+  .intro .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:.9rem;}
+  .intro h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.2vw,30px);color:var(--ink);max-width:680px;margin:0 auto 1.2rem;line-height:1.35;}
+  .intro p{font-size:15px;color:var(--text2);max-width:620px;margin:0 auto;line-height:1.75;}
+  .stat-row{display:flex;justify-content:center;gap:3.2rem;flex-wrap:wrap;margin-top:2.6rem;}
+  .stat{text-align:center;}
+  .stat .num{font-family:var(--serif);font-weight:700;font-size:34px;color:var(--bronze);}
+  .stat .lbl{font-size:11.5px;color:var(--text2);max-width:130px;margin-top:.3rem;line-height:1.4;}
+
+  /* SERVICES */
+  .services-head{text-align:left;margin-bottom:2.6rem;}
+  .services-head .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:.7rem;}
+  .services-head h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.2vw,30px);color:var(--ink);}
+  .services-head p{font-size:14.5px;color:var(--text2);max-width:560px;margin-top:.8rem;}
+
+  .service-list{display:flex;flex-direction:column;}
+  .service-row{
+    display:grid;grid-template-columns:60px 1fr;gap:1.6rem;
+    padding:1.8rem 0;border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .service-row:first-child{border-top:1px solid var(--line);}
+  .service-num{font-family:var(--serif);font-weight:700;font-size:26px;color:var(--bronze-l);}
+  .service-title{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:.5rem;}
+  .service-desc{font-size:13.8px;color:var(--text2);line-height:1.7;max-width:640px;}
+
+  /* CTA CHARLA */
+  .charla-box{
+    background:var(--ink);color:#fff;border-radius:6px;
+    padding:3.2rem 2.6rem;margin:1rem 0;
+    display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;
+    position:relative;overflow:hidden;
+  }
+  .charla-box::before{
+    content:'';position:absolute;top:-40px;right:-40px;width:220px;height:220px;
+    border-radius:50%;background:radial-gradient(circle,rgba(168,118,62,.35),transparent 70%);
+  }
+  .charla-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bronze-l);position:relative;}
+  .charla-box h2{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.3;max-width:600px;position:relative;}
+  .charla-box h2 em{font-style:italic;color:var(--bronze-l);}
+  .charla-box p{font-size:14.5px;opacity:.85;max-width:560px;line-height:1.7;position:relative;}
+  .charla-topics{display:flex;gap:10px;flex-wrap:wrap;margin:.4rem 0 .6rem;position:relative;}
+  .charla-topics span{
+    font-size:11.5px;font-weight:600;padding:6px 14px;border-radius:999px;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  }
+  .charla-cta{position:relative;}
+  .btn-bronze{
+    background:var(--bronze);color:#fff;padding:14px 32px;border-radius:3px;
+    font-size:13.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+    transition:background .15s;
+  }
+  .btn-bronze:hover{background:var(--bronze-l);}
+  .charla-note{font-size:11.5px;opacity:.65;position:relative;}
+
+  /* WHO IS THIS FOR */
+  .audience-strip{
+    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+    padding:0 2rem 4.5rem;max-width:1040px;margin:0 auto;
+  }
+  .aud-tag{
+    font-size:12px;font-weight:600;color:var(--ink2);
+    border:1px solid var(--line);background:var(--paper);
+    padding:8px 16px;border-radius:999px;
+  }
+
+  footer{border-top:1px solid var(--line);padding:2.2rem;text-align:center;font-size:11.5px;color:var(--text2);}
+  footer a{color:var(--bronze);text-decoration:none;font-weight:600;}
+
+  @media(max-width:640px){
+    section{padding:3.2rem 1.3rem;}
+    .service-row{grid-template-columns:40px 1fr;gap:1rem;}
+    .stat-row{gap:1.8rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Gobierno & <em>Continuidad</em> Familiar</div>
+  <a class="nav-btn" href="https://wa.me/5492615334983" target="_blank" rel="noopener">Agendar charla</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Asesoramiento en Empresa Familiar</div>
+  <h1>Que la empresa <em>sobreviva</em> a la generación que la fundó</h1>
+  <p class="lead">Trabajamos con dueños de estudios, comercios, industrias y empresas de servicios familiares para ordenar lo que el crecimiento fue mezclando: familia, propiedad y gestión.</p>
+  <div class="hero-ctas">
+    <a class="btn-solid" href="#charla">Charla sin cargo →</a>
+    <a class="btn-line" href="#servicios">Ver servicios</a>
+  </div>
+
+  <div class="venn-wrap">
+    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="195" cy="165" r="135" fill="var(--ink)" opacity="0.62" style="mix-blend-mode:multiply"/>
+      <circle cx="305" cy="165" r="135" fill="var(--bronze)" opacity="0.62" style="mix-blend-mode:multiply"/>
+      <circle cx="250" cy="270" r="135" fill="var(--olive)" opacity="0.62" style="mix-blend-mode:multiply"/>
+      <text x="120" y="115" font-family="Inter" font-size="16" font-weight="700" fill="#fff">Familia</text>
+      <text x="345" y="115" font-family="Inter" font-size="16" font-weight="700" fill="#fff" text-anchor="end">Propiedad</text>
+      <text x="250" y="345" font-family="Inter" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">Dirección / Gestión</text>
+      <text x="250" y="222" font-family="Fraunces" font-style="italic" font-size="17" font-weight="600" fill="#fff" text-anchor="middle">Empresa</text>
+      <text x="250" y="242" font-family="Fraunces" font-style="italic" font-size="17" font-weight="600" fill="#fff" text-anchor="middle">Familiar</text>
+    </svg>
+    <div class="venn-caption">Tres roles que casi siempre están mezclados en la misma persona — y ahí empiezan los problemas.</div>
+  </div>
+</div>
+
+<div class="audience-strip">
+  <span class="aud-tag">Estudios de arquitectura</span>
+  <span class="aud-tag">Estudios contables</span>
+  <span class="aud-tag">Comercios y retail</span>
+  <span class="aud-tag">Manufactura</span>
+  <span class="aud-tag">Distribución</span>
+  <span class="aud-tag">Servicios profesionales</span>
+</div>
+
+<!-- INTRO / PROBLEM -->
+<section class="intro">
+  <div class="section-eyebrow">El problema de fondo</div>
+  <h2>No es un problema de negocio. Es un problema de roles sin separar.</h2>
+  <p>La mayoría de los conflictos en la empresa familiar no nacen de una mala decisión comercial, sino de que una misma persona ocupa a la vez el lugar de padre, dueño y gerente — y nadie sabe, en cada momento, con cuál de los tres está hablando.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="num">1ª→2ª</div><div class="lbl">generación: la mayoría de las empresas familiares no llega a la segunda transición</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">roles distintos que conviven en la misma mesa familiar: propiedad, dirección, gestión</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">costo de empezar a ordenarlo antes de que el conflicto ya esté instalado</div></div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="services-head">
+    <div class="section-eyebrow">Áreas de trabajo</div>
+    <h2>Seis frentes, un mismo objetivo: continuidad</h2>
+    <p>No se trabajan aisladas — cada una impacta en las otras. Se ordenan según la urgencia y el momento de la empresa.</p>
+  </div>
+
+  <div class="service-list">
+    <div class="service-row">
+      <div class="service-num">01</div>
+      <div>
+        <div class="service-title">Gobierno de la empresa: separación de roles</div>
+        <div class="service-desc">Distinguir con claridad quién es propietario, quién dirige y quién gestiona el día a día — y en qué mesa se toma cada tipo de decisión.</div>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">02</div>
+      <div>
+        <div class="service-title">Implementación de Directorios que crean valor</div>
+        <div class="service-desc">Directorios reales, no de cumplimiento formal: con agenda, información y miembros (familiares y externos) que aportan mirada estratégica.</div>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">03</div>
+      <div>
+        <div class="service-title">Planificación e implementación de la sucesión</div>
+        <div class="service-desc">Proceso de traspaso del control — no solo del capital — planificado con años de anticipación y criterios explícitos, no por default.</div>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">04</div>
+      <div>
+        <div class="service-title">Remuneración de los miembros de la familia</div>
+        <div class="service-desc">Políticas claras que separan el sueldo por trabajar de la renta por ser dueño — para que dejen de mezclarse en la misma discusión.</div>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">05</div>
+      <div>
+        <div class="service-title">Desarrollo de capacidades: ser dueño, director, gerente</div>
+        <div class="service-desc">Formación de la siguiente generación (y de la actual) en las competencias específicas de cada uno de los tres roles.</div>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">06</div>
+      <div>
+        <div class="service-title">Impacto en los empleados no familiares</div>
+        <div class="service-desc">Reglas de juego parejas para quienes no son familia: carrera, decisiones y reconocimiento, para poder retener talento clave.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA CHARLA -->
+<section id="charla">
+  <div class="charla-box">
+    <div class="charla-eyebrow">Sin cargo · 45-60 minutos</div>
+    <h2>Charla: <em>Fortalezas y Trampas</em> en la Empresa Familiar</h2>
+    <p>Un primer encuentro para identificar en qué etapa está tu empresa, qué fortalezas propias del modelo familiar podés capitalizar y cuáles son las trampas más comunes que anticipan un conflicto de sucesión o de roles.</p>
+    <div class="charla-topics">
+      <span>Fortalezas del modelo familiar</span>
+      <span>Trampas más frecuentes</span>
+      <span>Diagnóstico inicial de tu empresa</span>
+    </div>
+    <div class="charla-cta">
+      <a class="btn-bronze" href="https://wa.me/5492615334983" target="_blank" rel="noopener">📱 Coordinar charla por WhatsApp</a>
+    </div>
+    <div class="charla-note">Pensada para dueños, socios y próximas generaciones — sin compromiso posterior.</div>
+  </div>
+</section>
+
+<footer>
+  César Isola · Asesoramiento en Gobierno y Continuidad de Empresas Familiares · Mendoza, Argentina<br>
+  <a href="https://wa.me/5492615334983" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://linkedin.com/in/cesarisola/" target="_blank" rel="noopener">LinkedIn</a>
+</footer>
+
+</body>
+</html>
